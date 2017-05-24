@@ -42,14 +42,14 @@ def handle_text_message(event):
         TextSendMessage(text=text)) #reply the same message from user
 
 
-@handler.add(MessageEvent, message=LocationMessage)
-def handle_position_message(event):
-    #text = str(event.message.text)+' OK!' #message from user
+# @handler.add(MessageEvent, message=LocationMessage)
+# def handle_location_message(event):
+#     #text = str(event.message.text)+' OK!' #message from user
 
-    line_bot_api.reply_message(
-        event.reply_token,
-        TextSendMessage(text=str(event.message.latitude)+','+str(event.message.longitude))
-    ) #reply the same message from user    
+#     line_bot_api.reply_message(
+#         event.reply_token,
+#         TextSendMessage(text=str(event.message.latitude)+','+str(event.message.longitude))
+#     ) #reply the same message from user    
     
 
 import os
