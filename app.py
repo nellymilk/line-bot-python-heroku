@@ -33,7 +33,7 @@ def callback():
 
     return 'OK'
 
-@handler.add(MessageEvent, message=TextMessage)
+@handler.add(MessageEvent)
 def handle_text_message(event):
 
     if event.message.type == 'text':
