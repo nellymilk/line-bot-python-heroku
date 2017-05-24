@@ -48,12 +48,7 @@ def handle_position_message(event):
 
     line_bot_api.reply_message(
         event.reply_token,
-        LocationSendMessage(
-            title='my location',
-            address='Taiwan',
-            latitude=event.message.latitude,
-            longitude=event.message.longitude
-        )
+        TextSendMessage(text=str(event.message.latitude)+','+str(event.message.longitude))
     ) #reply the same message from user    
     
 
