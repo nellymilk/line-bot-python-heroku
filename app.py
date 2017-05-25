@@ -10,7 +10,8 @@ from linebot.exceptions import (
 from linebot.models import (
     MessageEvent, TextMessage, TextSendMessage,
 )
-import datetime, pytz
+import datetime
+import pytz
 
 app = Flask(__name__)
 
