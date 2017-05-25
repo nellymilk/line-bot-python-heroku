@@ -40,7 +40,7 @@ def handle_text_message(event):
 
     if event.message.type == 'text':
         tz = pytz.timezone('Asia/Taipei')
-        time_now = time.strftime(' %Y-%m-%d %H:%M:%S %Z', time.gmtime(event.timestamp/1000)).replace(tzinfo=pytz.utc)
+        time_now = time.strftime(' %Y-%m-%d %H:%M:%S %Z', time.gmtime(event.timestamp/1000)).replace(tzinfo=pytz.timezone('UTC'))
         #.replace(tzinfo=pytz.utc)
         time_tw = time_now.astimezone(tz)
 
