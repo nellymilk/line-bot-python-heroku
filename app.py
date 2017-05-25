@@ -42,7 +42,6 @@ def handle_text_message(event):
         tz = pytz.timezone('Asia/Taipei')
         time_now = time.strftime(' %Y-%m-%d %H:%M:%S', time.gmtime(event.timestamp/1000)).replace(tzinfo=pytz.timezone('UTC')).astimezone(tz)
 
-        time_now.astimezone(EST)
         text = event.message.text + str(time_now)#message from user
 
         line_bot_api.reply_message(
