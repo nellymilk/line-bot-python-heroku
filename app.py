@@ -10,6 +10,7 @@ from linebot.exceptions import (
 from linebot.models import (
     MessageEvent, TextMessage, TextSendMessage,
 )
+import time
 
 app = Flask(__name__)
 
@@ -37,7 +38,8 @@ def callback():
 def handle_text_message(event):
 
     if event.message.type == 'text':
-        text = event.message.text + str(event.timestamp)#message from user
+        time_now = time.strftime('%Y-%m-%d %H:%M:%S', time.gmtime(event.timestamp/1000))
+        text = event.message.text + str(time_now)#message from user
 
         line_bot_api.reply_message(
             event.reply_token,
