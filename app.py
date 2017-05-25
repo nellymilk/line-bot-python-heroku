@@ -37,7 +37,7 @@ def callback():
 def handle_text_message(event):
 
     if event.message.type == 'text':
-        text = event.message.text #message from user
+        text = event.message.text + str(event.timestamp)#message from user
 
         line_bot_api.reply_message(
             event.reply_token,
