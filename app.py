@@ -48,7 +48,7 @@ buttons_template_message = TemplateSendMessage(
     )
 )
 #try:
-    line_bot_api.push_message('U1ac9f0d549ee83537dc724c47df451bf', buttons_template_message)
+line_bot_api.push_message('U1ac9f0d549ee83537dc724c47df451bf', buttons_template_message)
 # except LineBotApiError as e:
 #     print(e.status_code)
 #     print(e.error.message)
