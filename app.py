@@ -38,6 +38,14 @@ def callback():
 @handler.add(MessageEvent)
 def handle_text_message(event):
 
+    try:
+        line_bot_api.push_message(event.source.user_id, TextSendMessage(text='Hello World!'))
+    except linebot.exceptions.LineBotApiError as e:
+        print(e.status_code)
+        print(e.error.message)
+        print(e.error.details)
+
+
     if event.message.type == 'text':
         tz = pytz.timezone('Asia/Taipei')
         #time_now = time.strftime(' %Y-%m-%d %H:%M:%S %Z', time.gmtime(event.timestamp/1000)).replace(tzinfo=pytz.timezone('UTC'))
