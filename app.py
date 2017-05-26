@@ -45,11 +45,9 @@ def handle_text_message(event):
         #.replace(tzinfo=pytz.timezone('US/Pacific'))
         
         time_tw = time_now.astimezone(tz)
-        time = time_tw.strftime(' %Y-%m-%d %H:%M:%S')
+        time = time_tw.strftime(' %Y-%m-%d %H:%M:%S')    
 
-        print event.source.user_id
-
-        text = event.message.text + time + ' ID: \n' #message from user
+        text = event.message.text + time + '\n ID: ' + event.source.user_id #message from user
 
         line_bot_api.reply_message(
             event.reply_token,
