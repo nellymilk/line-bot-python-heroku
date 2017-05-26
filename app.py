@@ -47,7 +47,9 @@ def handle_text_message(event):
         time_tw = time_now.astimezone(tz)
         time = time_tw.strftime(' %Y-%m-%d %H:%M:%S')
 
-        text = event.message.text + time + ' ID: \n'+ str(event['source']) #message from user
+        print event.source
+        
+        text = event.message.text + time + ' ID: \n' #message from user
 
         line_bot_api.reply_message(
             event.reply_token,
