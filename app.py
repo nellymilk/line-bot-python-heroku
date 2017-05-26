@@ -29,24 +29,14 @@ def callback():
 
     # handle webhook body
     try:
-        handler.handle(body, signature)
-
-        try:
-            line_bot_api.push_message('U1ac9f0d549ee83537dc724c47df451bf', TextSendMessage(text='Hello World!'))
-        except linebot.exceptions.LineBotApiError as e:
-            print(e.status_code)
-            print(e.error.message)
-            print(e.error.details)
+        handler.handle(body, signature)       
     except InvalidSignatureError:
         abort(400)
 
     return 'OK'
 
 @handler.add(MessageEvent)
-def handle_text_message(event):
-
-    
-
+def handle_text_message(event):    
 
     if event.message.type == 'text':
         tz = pytz.timezone('Asia/Taipei')
@@ -73,3 +63,9 @@ def handle_text_message(event):
 import os
 if __name__ == "__main__":
     app.run(host='0.0.0.0',port=os.environ['PORT'])
+    try:
+        line_bot_api.push_message('U1ac9f0d549ee83537dc724c47df451bf', TextSendMessage(text='Hello World!'))
+    except linebot.exceptions.LineBotApiError as e:
+        print(e.status_code)
+        print(e.error.message)
+        print(e.error.details)
