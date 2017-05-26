@@ -8,7 +8,7 @@ from linebot.exceptions import (
     InvalidSignatureError
 )
 from linebot.models import (
-    MessageEvent, TextMessage, TextSendMessage, LocationSendMessage,
+    MessageEvent, TextMessage, TextSendMessage, LocationSendMessage,TemplateSendMessage,
 )
 from datetime import datetime
 import pytz
@@ -18,8 +18,38 @@ app = Flask(__name__)
 line_bot_api = LineBotApi('3bh4V8siG/f1u9liIXqi/0002hSE4332/106XyUZ8tfYRXNrKpV/9fDpvPWO1I+ewd5fNvAImy6Tkao025DlWpXhp23R0hbvo16i/CXfVoY4Siwy0Zjrvgw6DWK/9k3GhjoHanOUV3bPSLOrx+6FOQdB04t89/1O/w1cDnyilFU=') #Your Channel Access Token
 handler = WebhookHandler('f52cabf61fb026df7b0703761876d96e') #Your Channel Secret
 
+# try:
+#     line_bot_api.push_message('U1ac9f0d549ee83537dc724c47df451bf', TextSendMessage(text='Hello World!'))
+# except linebot.exceptions.LineBotApiError as e:
+#     print(e.status_code)
+#     print(e.error.message)
+#     print(e.error.details)
+
+buttons_template_message = TemplateSendMessage(
+    alt_text='Buttons template',
+    template=ButtonsTemplate(
+        thumbnail_image_url='https://www.google.com.tw/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&ved=0ahUKEwio79as9ozUAhUBFZQKHcxADJYQjRwIBw&url=http%3A%2F%2Fwww.58pic.com%2Fsucai%2F11160202.html&psig=AFQjCNFo-emqGbuMPkE15XRw2hv1l0od_A&ust=1495866266979150',
+        title='Menu',
+        text='Please select',
+        actions=[
+            PostbackTemplateAction(
+                label='postback',
+                text='postback text',
+                data='action=buy&itemid=1'
+            ),
+            MessageTemplateAction(
+                label='message',
+                text='message text'
+            ),
+            URITemplateAction(
+                label='uri',
+                uri='http://example.com/'
+            )
+        ]
+    )
+)
 try:
-    line_bot_api.push_message('U1ac9f0d549ee83537dc724c47df451bf', TextSendMessage(text='Hello World!'))
+    line_bot_api.push_message('U1ac9f0d549ee83537dc724c47df451bf', buttons_template_message)
 except linebot.exceptions.LineBotApiError as e:
     print(e.status_code)
     print(e.error.message)
@@ -64,7 +94,7 @@ def handle_text_message(event):
         line_bot_api.reply_message(
             event.reply_token,
             LocationSendMessage(title='my location',
-                address='IIS',
+                address=event.message.address,
                 latitude=event.message.latitude,
                 longitude=event.message.longitude)
         ) #reply the same message from user     
