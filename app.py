@@ -27,7 +27,7 @@ handler = WebhookHandler('f52cabf61fb026df7b0703761876d96e') #Your Channel Secre
 buttons_template_message = TemplateSendMessage(
     alt_text='Buttons template',
     template=ButtonsTemplate(
-        thumbnail_image_url='https://www.google.com.tw/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&ved=0ahUKEwio79as9ozUAhUBFZQKHcxADJYQjRwIBw&url=http%3A%2F%2Fwww.58pic.com%2Fsucai%2F11160202.html&psig=AFQjCNFo-emqGbuMPkE15XRw2hv1l0od_A&ust=1495866266979150',
+        thumbnail_image_url='http://pic.qiantucdn.com/58pic/11/12/27/89z58PICUBk.jpg',
         title='Menu',
         text='Please select',
         actions=[
