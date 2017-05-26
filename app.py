@@ -7,7 +7,7 @@ from linebot import (
 from linebot.exceptions import (
     InvalidSignatureError
 )
-from linebot import models
+from linebot.models import *
 
 from datetime import datetime
 import pytz
