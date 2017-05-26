@@ -63,7 +63,10 @@ def handle_text_message(event):
     elif event.message.type == 'location':
         line_bot_api.reply_message(
             event.reply_token,
-            TextSendMessage(text=str(event.message.latitude)+','+str(event.message.longitude))
+            LocationSendMessage(title='my location',
+                address='IIS',
+                latitude=event.message.latitude,
+                longitude=event.message.longitude)
         ) #reply the same message from user     
     
 
