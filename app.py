@@ -7,9 +7,8 @@ from linebot import (
 from linebot.exceptions import (
     InvalidSignatureError
 )
-from linebot.models import (
-    MessageEvent, TextMessage, TextSendMessage, LocationSendMessage,TemplateSendMessage,
-)
+import linebot.models
+
 from datetime import datetime
 import pytz
 
