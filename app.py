@@ -30,6 +30,13 @@ def callback():
     # handle webhook body
     try:
         handler.handle(body, signature)
+
+        try:
+            line_bot_api.push_message('U1ac9f0d549ee83537dc724c47df451bf', TextSendMessage(text='Hello World!'))
+        except linebot.exceptions.LineBotApiError as e:
+            print(e.status_code)
+            print(e.error.message)
+            print(e.error.details)
     except InvalidSignatureError:
         abort(400)
 
@@ -38,12 +45,7 @@ def callback():
 @handler.add(MessageEvent)
 def handle_text_message(event):
 
-    try:
-        line_bot_api.push_message(event.source.user_id, TextSendMessage(text='Hello World!'))
-    except linebot.exceptions.LineBotApiError as e:
-        print(e.status_code)
-        print(e.error.message)
-        print(e.error.details)
+    
 
 
     if event.message.type == 'text':
