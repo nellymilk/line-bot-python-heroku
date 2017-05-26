@@ -47,7 +47,7 @@ def handle_text_message(event):
         time_tw = time_now.astimezone(tz)
         time = time_tw.strftime(' %Y-%m-%d %H:%M:%S')
 
-        print event.source['userId']
+        print event.source.userId
 
         text = event.message.text + time + ' ID: \n' #message from user
 
