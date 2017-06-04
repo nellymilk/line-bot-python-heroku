@@ -75,19 +75,33 @@ def callback():
 def handle_text_message(event):    
 
     if event.message.type == 'text':
-        tz = pytz.timezone('Asia/Taipei')
-        #time_now = time.strftime(' %Y-%m-%d %H:%M:%S %Z', time.gmtime(event.timestamp/1000)).replace(tzinfo=pytz.timezone('UTC'))
-        time_now = datetime.fromtimestamp(event.timestamp/1000).replace(tzinfo=pytz.utc)    
-        #.replace(tzinfo=pytz.timezone('US/Pacific'))
+        # tz = pytz.timezone('Asia/Taipei')
+        # time_now = datetime.fromtimestamp(event.timestamp/1000).replace(tzinfo=pytz.utc)            
         
-        time_tw = time_now.astimezone(tz)
-        time = time_tw.strftime(' %Y-%m-%d %H:%M:%S')    
+        # time_tw = time_now.astimezone(tz)
+        # time = time_tw.strftime(' %Y-%m-%d %H:%M:%S')    
 
-        text = event.message.text + time + '\n ID: ' + event.source.user_id #message from user
+        # text = event.message.text + time + '\n ID: ' + event.source.user_id #message from user
+
+        buttons_template_message = TemplateSendMessage(
+            alt_text='Buttons template',
+            template=ButtonsTemplate(
+                thumbnail_image_url='https://raw.githubusercontent.com/nellymilk/line-bot-python-heroku/master/images/img2.jpg',
+                title='Stock detail',
+                text='Please click following link',
+                actions=[            
+                    URITemplateAction(
+                        label='uri',
+                        uri='http://goodinfo.tw/stockinfo/StockDetail.asp?STOCK_ID=' + event.message.text
+                    )
+                ]
+            )
+        )
 
         line_bot_api.reply_message(
-            event.reply_token,
-            TextSendMessage(text=text)) #reply the same message from user
+            event.reply_token,buttons_template_message
+        ) #reply the same message from user
+        #TextSendMessage(text=text)
 
     elif event.message.type == 'location':
         line_bot_api.reply_message(
