@@ -27,7 +27,7 @@ handler = WebhookHandler('f52cabf61fb026df7b0703761876d96e') #Your Channel Secre
 buttons_template_message = TemplateSendMessage(
     alt_text='Buttons template',
     template=ButtonsTemplate(
-        thumbnail_image_url='https://raw.githubusercontent.com/nellymilk/line-bot-python-heroku/master/images/img2.jpg',
+        thumbnail_image_url='https://raw.githubusercontent.com/nellymilk/line-bot-python-heroku/master/images/img.jpg',
         title='Menu',
         text='Please select',
         actions=[
@@ -86,12 +86,12 @@ def handle_text_message(event):
         buttons_template_message = TemplateSendMessage(
             alt_text='Buttons template',
             template=ButtonsTemplate(
-                thumbnail_image_url='https://raw.githubusercontent.com/nellymilk/line-bot-python-heroku/master/images/img2.jpg',
+                thumbnail_image_url='https://raw.githubusercontent.com/nellymilk/line-bot-python-heroku/master/images/stock.jpg',
                 title='Stock detail',
                 text='Please click following link',
                 actions=[            
                     URITemplateAction(
-                        label='uri',
+                        label=event.message.text,
                         uri='http://goodinfo.tw/stockinfo/StockDetail.asp?STOCK_ID=' + event.message.text
                     )
                 ]
