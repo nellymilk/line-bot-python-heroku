@@ -24,31 +24,34 @@ handler = WebhookHandler('f52cabf61fb026df7b0703761876d96e') #Your Channel Secre
 #     print(e.error.message)
 #     print(e.error.details)
 
-buttons_template_message = TemplateSendMessage(
-    alt_text='Buttons template',
-    template=ButtonsTemplate(
-        thumbnail_image_url='https://raw.githubusercontent.com/nellymilk/line-bot-python-heroku/master/images/img.jpg',
-        title='Menu',
-        text='Please select',
-        actions=[
-            PostbackTemplateAction(
-                label='postback',
-                text='postback text',
-                data='action=buy&itemid=1'
-            ),
-            MessageTemplateAction(
-                label='message',
-                text='message text'
-            ),
-            URITemplateAction(
-                label='uri',
-                uri='http://example.com/'
-            )
-        ]
-    )
-)
+# buttons_template_message = TemplateSendMessage(
+#     alt_text='Buttons template',
+#     template=ButtonsTemplate(
+#         thumbnail_image_url='https://raw.githubusercontent.com/nellymilk/line-bot-python-heroku/master/images/img.jpg',
+#         title='Menu',
+#         text='Please select',
+#         actions=[
+#             PostbackTemplateAction(
+#                 label='postback',
+#                 text='postback text',
+#                 data='action=buy&itemid=1'
+#             ),
+#             MessageTemplateAction(
+#                 label='message',
+#                 text='message text'
+#             ),
+#             URITemplateAction(
+#                 label='uri',
+#                 uri='http://example.com/'
+#             )
+#         ]
+#     )
+# )
 #try:
-line_bot_api.push_message('U1ac9f0d549ee83537dc724c47df451bf', buttons_template_message)
+
+#line_bot_api.push_message('U1ac9f0d549ee83537dc724c47df451bf', buttons_template_message)
+
+
 # except LineBotApiError as e:
 #     print(e.status_code)
 #     print(e.error.message)
