@@ -123,11 +123,11 @@ def handle_text_message(event):
         # text = event.message.text + time + '\n ID: ' + event.source.user_id #message from user
 
         if event.message.text == 'help':
-            # result = findStock()
-            print('123')
-            # line_bot_api.reply_message(
-            #     event.reply_token,TextSendMessage(text=str(result))
-            # )
+            result = findStock()
+            #print('123')
+            line_bot_api.reply_message(
+                event.reply_token,TextSendMessage(text=str(result))
+            )
         else:    
             buttons_template_message = TemplateSendMessage(
                 alt_text='Buttons template',
