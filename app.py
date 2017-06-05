@@ -167,9 +167,10 @@ def handle_text_message(event):
 
         if event.message.text == 'help':
             result = findStock()
-            line_bot_api.reply_message(
-                event.reply_token,TextSendMessage(text=str(result))
-            )
+            print(result)
+            # line_bot_api.reply_message(
+            #     event.reply_token,TextSendMessage(text=str(result))
+            # )
         else:    
             buttons_template_message = TemplateSendMessage(
                 alt_text='Buttons template',
