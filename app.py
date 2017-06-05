@@ -12,6 +12,10 @@ from linebot.models import *
 from datetime import datetime
 import pytz
 
+import requests
+import urllib
+from lxml import etree
+
 app = Flask(__name__)
 
 line_bot_api = LineBotApi('3bh4V8siG/f1u9liIXqi/0002hSE4332/106XyUZ8tfYRXNrKpV/9fDpvPWO1I+ewd5fNvAImy6Tkao025DlWpXhp23R0hbvo16i/CXfVoY4Siwy0Zjrvgw6DWK/9k3GhjoHanOUV3bPSLOrx+6FOQdB04t89/1O/w1cDnyilFU=') #Your Channel Access Token
@@ -56,6 +60,81 @@ handler = WebhookHandler('f52cabf61fb026df7b0703761876d96e') #Your Channel Secre
 #     print(e.status_code)
 #     print(e.error.message)
 #     print(e.error.details)
+def crawler(url):
+    header = {    
+        'User-Agent':'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36'
+    }    
+    response = requests.get(url,headers=header)
+    html = response.content.decode()
+
+    page = etree.HTML(html)
+    temp = []
+    for i in page.xpath("//table[@id='tblStockList']//tr[@id]"):
+        temp.extend(i.xpath("./td[position()<2]//text()"))
+    
+    return temp   
+
+def findStock():
+
+    link = [
+        "http://goodinfo.tw/stockinfo/StockList.asp?MARKET_CAT=%E6%99%BA%E6%85%A7%E9%81%B8%E8%82%A1&INDUSTRY_CAT=5%E6%97%A5%2F10%E6%97%A5%2F%E6%9C%88%E7%B7%9A%E5%A4%9A%E9%A0%AD%E6%8E%92%E5%88%97%40%40%E5%9D%87%E5%83%B9%E7%B7%9A%E5%A4%9A%E9%A0%AD%E6%8E%92%E5%88%97%40%405%E6%97%A5%2F10%E6%97%A5%2F%E6%9C%88%E7%B7%9A&SHEET=%E7%A7%BB%E5%8B%95%E5%9D%87%E7%B7%9A&SHEET2=%E7%9B%AE%E5%89%8D%E4%BD%8D%E7%BD%AE%28%E5%85%83%29&RPT_TIME=",
+        "http://goodinfo.tw/stockinfo/StockList.asp?MARKET_CAT=%E6%99%BA%E6%85%A7%E9%81%B8%E8%82%A1&INDUSTRY_CAT=%E8%82%A1%E5%83%B9%E5%89%B5%E4%B8%80%E5%80%8B%E6%9C%88%E9%AB%98%E9%BB%9E%40%40%E8%82%A1%E5%83%B9%E5%89%B5%E5%A4%9A%E6%97%A5%E9%AB%98%E9%BB%9E%40%40%E4%B8%80%E5%80%8B%E6%9C%88&SHEET=%E6%BC%B2%E8%B7%8C%E5%8F%8A%E6%88%90%E4%BA%A4%E7%B5%B1%E8%A8%88&SHEET2=%E6%9C%80%E9%AB%98%2F%E6%9C%80%E4%BD%8E%E8%82%A1%E5%83%B9%E7%B5%B1%E8%A8%88%285%E6%97%A5%2F10%E6%97%A5%2F%E4%B8%80%E5%80%8B%E6%9C%88%29&RPT_TIME=",
+        "http://goodinfo.tw/stockinfo/StockList.asp?MARKET_CAT=%E6%99%BA%E6%85%A7%E9%81%B8%E8%82%A1&INDUSTRY_CAT=%E4%B8%89%E5%A4%A7%E6%B3%95%E4%BA%BA%E9%80%A3%E8%B2%B7+%28%E6%97%A5%29%40%40%E4%B8%89%E5%A4%A7%E6%B3%95%E4%BA%BA%E9%80%A3%E7%BA%8C%E8%B2%B7%E8%B6%85%40%40%E9%80%A3%E7%BA%8C%E8%B2%B7%E8%B6%85+%28%E6%97%A5%29&SHEET=%E6%B3%95%E4%BA%BA%E8%B2%B7%E8%B3%A3&SHEET2=%E9%80%A3%E8%B2%B7%E9%80%A3%E8%B3%A3%E7%B5%B1%E8%A8%88%28%E6%97%A5%29&RPT_TIME="
+    ]
+
+    for i in range(3):
+        temp = crawler(link[i])
+        if i == 0:
+            result = temp
+
+        result = set(result) & set(temp)
+
+    return list(result)    
+    # url = "http://goodinfo.tw/stockinfo/StockList.asp?MARKET_CAT=%E6%99%BA%E6%85%A7%E9%81%B8%E8%82%A1&INDUSTRY_CAT=5%E6%97%A5%2F10%E6%97%A5%2F%E6%9C%88%E7%B7%9A%E5%A4%9A%E9%A0%AD%E6%8E%92%E5%88%97%40%40%E5%9D%87%E5%83%B9%E7%B7%9A%E5%A4%9A%E9%A0%AD%E6%8E%92%E5%88%97%40%405%E6%97%A5%2F10%E6%97%A5%2F%E6%9C%88%E7%B7%9A&SHEET=%E7%A7%BB%E5%8B%95%E5%9D%87%E7%B7%9A&SHEET2=%E7%9B%AE%E5%89%8D%E4%BD%8D%E7%BD%AE%28%E5%85%83%29&RPT_TIME="
+
+    # request = urllib.request.Request(url) 
+    # request.add_header("User-Agent","Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36")
+    # response = urllib.request.urlopen(request)
+    # html = response.read()
+    # #print(html.decode("utf8"))
+
+    # page = etree.HTML(html)
+    # multitrend = []
+    # for i in page.xpath("//table[@id='tblStockList']//tr[@id]"):
+    #     multitrend.extend(i.xpath("./td[position()<2]//text()"))
+
+    # #print(multitrend) 
+
+    # url = 'http://goodinfo.tw/stockinfo/StockList.asp?MARKET_CAT=%E6%99%BA%E6%85%A7%E9%81%B8%E8%82%A1&INDUSTRY_CAT=%E8%82%A1%E5%83%B9%E5%89%B5%E4%B8%80%E5%80%8B%E6%9C%88%E9%AB%98%E9%BB%9E%40%40%E8%82%A1%E5%83%B9%E5%89%B5%E5%A4%9A%E6%97%A5%E9%AB%98%E9%BB%9E%40%40%E4%B8%80%E5%80%8B%E6%9C%88&SHEET=%E6%BC%B2%E8%B7%8C%E5%8F%8A%E6%88%90%E4%BA%A4%E7%B5%B1%E8%A8%88&SHEET2=%E6%9C%80%E9%AB%98%2F%E6%9C%80%E4%BD%8E%E8%82%A1%E5%83%B9%E7%B5%B1%E8%A8%88%285%E6%97%A5%2F10%E6%97%A5%2F%E4%B8%80%E5%80%8B%E6%9C%88%29&RPT_TIME='
+    # header = {    
+    #     'User-Agent':'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36'
+    # }    
+    # response = requests.get(url,headers=header)
+    # html = response.content.decode()
+    # #print(html)
+    
+    # page = etree.HTML(html)
+    # value_strongChange = []
+    # for i in page.xpath("//table[@id='tblStockList']//tr[@id]"):
+    #     value_strongChange.extend(i.xpath("./td[position()<2]//text()"))
+        
+    # #print(value_strongChange)
+
+    # url = 'http://goodinfo.tw/stockinfo/StockList.asp?MARKET_CAT=%E6%99%BA%E6%85%A7%E9%81%B8%E8%82%A1&INDUSTRY_CAT=%E4%B8%89%E5%A4%A7%E6%B3%95%E4%BA%BA%E9%80%A3%E8%B2%B7+%28%E6%97%A5%29%40%40%E4%B8%89%E5%A4%A7%E6%B3%95%E4%BA%BA%E9%80%A3%E7%BA%8C%E8%B2%B7%E8%B6%85%40%40%E9%80%A3%E7%BA%8C%E8%B2%B7%E8%B6%85+%28%E6%97%A5%29&SHEET=%E6%B3%95%E4%BA%BA%E8%B2%B7%E8%B3%A3&SHEET2=%E9%80%A3%E8%B2%B7%E9%80%A3%E8%B3%A3%E7%B5%B1%E8%A8%88%28%E6%97%A5%29&RPT_TIME='
+    # header = {    
+    #     'User-Agent':'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36'
+    # }    
+    # response = requests.get(url,headers=header)
+    # html = response.content.decode()
+    # #print(html)
+
+    # from lxml import etree
+    # page = etree.HTML(html)
+    # bigCompany_buy = []
+    # for i in page.xpath("//table[@id='tblStockList']//tr[@id]"):
+    #     bigCompany_buy.extend(i.xpath("./td[position()<2]//text()"))
+        
+    # print(bigCompany_buy)
 
 @app.route("/callback", methods=['POST'])
 def callback():
@@ -86,24 +165,30 @@ def handle_text_message(event):
 
         # text = event.message.text + time + '\n ID: ' + event.source.user_id #message from user
 
-        buttons_template_message = TemplateSendMessage(
-            alt_text='Buttons template',
-            template=ButtonsTemplate(
-                thumbnail_image_url='https://raw.githubusercontent.com/nellymilk/line-bot-python-heroku/master/images/stock.jpg',
-                title='Stock detail',
-                text='Please click following link',
-                actions=[            
-                    URITemplateAction(
-                        label=event.message.text,
-                        uri='http://goodinfo.tw/stockinfo/StockDetail.asp?STOCK_ID=' + event.message.text
-                    )
-                ]
+        if event.message.text == 'help':
+            result = findtock()
+            line_bot_api.reply_message(
+                event.reply_token,TextSendMessage(text=result)
             )
-        )
+        else:    
+            buttons_template_message = TemplateSendMessage(
+                alt_text='Buttons template',
+                template=ButtonsTemplate(
+                    thumbnail_image_url='https://raw.githubusercontent.com/nellymilk/line-bot-python-heroku/master/images/stock.jpg',
+                    title='Stock detail',
+                    text='Please click following link',
+                    actions=[            
+                        URITemplateAction(
+                            label=event.message.text,
+                            uri='http://goodinfo.tw/stockinfo/StockDetail.asp?STOCK_ID=' + event.message.text
+                        )
+                    ]
+                )
+            )
 
-        line_bot_api.reply_message(
-            event.reply_token,buttons_template_message
-        ) #reply the same message from user
+            line_bot_api.reply_message(
+                event.reply_token,buttons_template_message
+            ) #reply the same message from user
         #TextSendMessage(text=text)
 
     elif event.message.type == 'location':
