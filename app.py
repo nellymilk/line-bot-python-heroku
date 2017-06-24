@@ -130,7 +130,7 @@ def handle_text_message(event):
             result = findStock()
             #print('123')
             line_bot_api.reply_message(
-                event.reply_token,TextSendMessage(text=str(result))
+                event.reply_token,TextSendMessage(text=result)
             )
         else:    
             buttons_template_message = TemplateSendMessage(
