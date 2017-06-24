@@ -88,10 +88,12 @@ def crawler(url):
 
     page = etree.HTML(html)
     temp = []
+    name_value = {}
     for i in page.xpath("//table[@id='tblStockList']//tr[@id]"):
         temp.extend(i.xpath("./td[position()<2]//text()"))
-    
-    return temp   
+        name_value[i.xpath("./td[1]//text()")[0]]=[i.xpath("./td[1]//text()")[0],i.xpath("./td[2]//text()")[0],i.xpath("./td[3]//text()")[0]]
+
+    return temp,name_value   
 
 def findStock():
 
@@ -103,14 +105,14 @@ def findStock():
     ]
 
     for i in range(4):
-        temp = crawler(link[i])
+        temp,name_value = crawler(link[i])
         if i == 0:
             result = temp
 
         result = set(result) & set(temp)
 
-
-    return list(filter(lambda x: len(x)<=4, list(result)))   
+    output = list(filter(lambda x: len(x)<=4, list(result)))   
+    return list(map(lambda x: print(name_value[x]),output))
 
 @handler.add(MessageEvent)
 def handle_text_message(event):    
