@@ -112,7 +112,7 @@ def findStock():
         result = set(result) & set(temp)
 
     output = list(filter(lambda x: len(x)<=4, list(result)))   
-    return list(map(lambda x: print name_value[x], output))
+    return list(map(lambda x: name_value[x], output))
 
 @handler.add(MessageEvent)
 def handle_text_message(event):    
