@@ -91,7 +91,7 @@ def crawler(url):
     name_value = {}
     for i in page.xpath("//table[@id='tblStockList']//tr[@id]"):
         temp.extend(i.xpath("./td[position()<2]//text()"))
-        name_value[i.xpath("./td[1]//text()")[0]]=[i.xpath("./td[1]//text()")[0],i.xpath("./td[2]//text()")[0],i.xpath("./td[3]//text()")[0]]
+        name_value[i.xpath("./td[1]//text()")[0]]=[str(i.xpath("./td[1]//text()")[0]),i.xpath("./td[2]//text()")[0],i.xpath("./td[3]//text()")[0]]
 
     return temp,name_value   
 
@@ -112,6 +112,7 @@ def findStock():
         result = set(result) & set(temp)
 
     print(name_value)
+    print(map(lambda x: str(x),name_value['8917']))
     output = list(filter(lambda x: len(x)<=4, list(result)))   
     return list(map(lambda x: name_value[x], output))
 
