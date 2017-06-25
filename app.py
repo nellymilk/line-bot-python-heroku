@@ -114,12 +114,8 @@ def findStock():
     print(name_value)    
 
     output = list(filter(lambda x: len(x)<=4, list(result))) 
-    tmp = []
-    for i in range(len(output)):
-        tmp.append(name_value[output[i]])  
-        tmp.append('\n')
-    return tmp
-    #return list(map(lambda x: name_value[x], output))
+    
+    return sorted(list(map(lambda x: name_value[x], output)), key=lambda x: float(x[2]))
 
 @handler.add(MessageEvent)
 def handle_text_message(event):    
@@ -136,6 +132,7 @@ def handle_text_message(event):
         if event.message.text == 'help':
             result = findStock()
             #print('123')
+
             line_bot_api.reply_message(
                 event.reply_token,TextSendMessage(text=str(result))
             )
