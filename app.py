@@ -117,7 +117,7 @@ def findStock():
     temp = []
     for i in range(len(output)):
         temp = temp.append(name_value[output[i]])  
-        temp = temp.append('\n')
+        temp = temp.extend('\n')
     return temp
     #return list(map(lambda x: name_value[x], output))
 
