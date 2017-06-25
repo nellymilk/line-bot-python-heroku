@@ -112,7 +112,9 @@ def findStock():
         result = set(result) & set(temp)
 
     print(name_value)
-    print(map(lambda x: str(x),name_value['8917']))
+
+    map(lambda x: print(x),name_value['8917'])
+
     output = list(filter(lambda x: len(x)<=4, list(result)))   
     return list(map(lambda x: name_value[x], output))
 
