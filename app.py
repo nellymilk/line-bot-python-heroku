@@ -114,11 +114,11 @@ def findStock():
     print(name_value)    
 
     output = list(filter(lambda x: len(x)<=4, list(result))) 
-    temp = []
+    tmp = []
     for i in range(len(output)):
-        temp = temp.append(name_value[output[i]])  
-        temp = temp.extend('\n')
-    return temp
+        tmp.append(name_value[output[i]])  
+        tmp.append('\n')
+    return tmp
     #return list(map(lambda x: name_value[x], output))
 
 @handler.add(MessageEvent)
