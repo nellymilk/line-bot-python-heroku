@@ -111,7 +111,7 @@ def findStock():
 
         result = set(result) & set(temp)
 
-    print(name_value)    
+    print('crawler successfully!')    
 
     output = list(filter(lambda x: len(x)<=4, list(result))) 
     
