@@ -113,9 +113,11 @@ def findStock():
 
     print('crawler successfully!')    
 
-    output = list(filter(lambda x: len(x)<=4, list(result)))     
+    output = list(filter(lambda x: len(x)<=4, list(result))) 
+    print(output)    
 
     for index in output:
+        print(index)
         industry = find_Industry('http://goodinfo.tw/stockinfo/StockDetail.asp?STOCK_ID='+index)
         #name_value[index].extend(industry)
         print(industry)
