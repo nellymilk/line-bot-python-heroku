@@ -157,7 +157,7 @@ def handle_text_message(event):
             )
         else:    
             buttons_template_message = TemplateSendMessage(
-                name, industry = findName_Industry('http://goodinfo.tw/stockinfo/StockDetail.asp?STOCK_ID=' + event.message.text)
+               # name, industry = findName_Industry('http://goodinfo.tw/stockinfo/StockDetail.asp?STOCK_ID=' + event.message.text),
                 alt_text='Buttons template',
                 template=ButtonsTemplate(
                     thumbnail_image_url='https://raw.githubusercontent.com/nellymilk/line-bot-python-heroku/master/images/stock.jpg',
@@ -165,7 +165,7 @@ def handle_text_message(event):
                     text='Please click following link',
                     actions=[            
                         URITemplateAction(
-                            label=event.message.text+' '+name+' '+industry,
+                            label=event.message.text+findName_Industry('http://goodinfo.tw/stockinfo/StockDetail.asp?STOCK_ID=' + event.message.text),
                             uri='http://goodinfo.tw/stockinfo/StockDetail.asp?STOCK_ID=' + event.message.text
                         )
                     ]
