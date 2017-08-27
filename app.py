@@ -142,7 +142,7 @@ def find_Industry(url):
         if title == '公 司 基 本 資 料':
             industry = page.xpath("//table[@class='solid_1_padding_3_2_tbl']//td[2]//text()")[4]
         else:
-             industry = 'NULL'   
+             industry = 'xxx'   
     except Exception as e:
         industry = 'NULL'
     
