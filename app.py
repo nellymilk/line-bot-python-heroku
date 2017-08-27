@@ -137,7 +137,7 @@ def find_Industry(url):
     page = etree.HTML(html)
     
     try:        
-        industry = page.xpath("//table[@class='solid_1_padding_3_2_tbl']//td[2]//text()|//table[@style='font-size:10pt;word-break:break-all;']//td[2]//text()")[4]  
+        industry = page.xpath("//table[@style='font-size:10pt;word-break:break-all;']//td[2]//text()")[4]  
     
     except Exception as e:
         industry = 'NULL'
