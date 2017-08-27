@@ -137,12 +137,14 @@ def find_Industry(url):
     page = etree.HTML(html)
     
     try:
-        industry = page.xpath("//table[@class='solid_1_padding_3_2_tbl']//td[2]//text()")[4]
+        if page.xpath("//table[@class='solid_1_padding_3_2_tbl']//td//text()")[0] == '公司基本資料':
+            industry = page.xpath("//table[@class='solid_1_padding_3_2_tbl']//td[2]//text()")[4]
+        else:
+             industry = 'NULL'   
     except Exception as e:
         industry = 'NULL'
     
-    # if str(industry[:-1]) != '業':
-    #     industry = 'NULL'    
+       
     return industry
 
 def find_Name(url):
