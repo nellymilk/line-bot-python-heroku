@@ -139,7 +139,7 @@ def find_Industry(url):
     try:
         title = page.xpath("//table[@class='solid_1_padding_3_2_tbl']//td//text()")[0]
         print(title)
-        if title == '公司基本資料':
+        if title == '公 司 基 本 資 料':
             industry = page.xpath("//table[@class='solid_1_padding_3_2_tbl']//td[2]//text()")[4]
         else:
              industry = 'NULL'   
