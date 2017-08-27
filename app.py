@@ -114,12 +114,10 @@ def findStock():
     print('crawler successfully!')    
 
     output = list(filter(lambda x: len(x)<=4, list(result))) 
-    # print(output)
-    # print('\n')
-    # print(name_value)
-    #sorted(list(map(lambda x: name_value[x], output)), key=lambda x: float(x[2]))
-
+    
     for index in output:
+        industry = find_Industry('http://goodinfo.tw/stockinfo/StockDetail.asp?STOCK_ID='+index)
+        name_value[index].extend(industry)
 
     #page.xpath("//table[@class='solid_1_padding_3_2_tbl']//td[2]//text()")[4]
     
