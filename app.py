@@ -133,7 +133,7 @@ def findName_Industry(url):
     name = temp[0]
     industry = temp[4] 
         
-    return name 
+    return [name,industry] 
 
 
 @handler.add(MessageEvent)
@@ -165,7 +165,7 @@ def handle_text_message(event):
                     text='Please click following link',
                     actions=[            
                         URITemplateAction(
-                            label=event.message.text+findName_Industry('http://goodinfo.tw/stockinfo/StockDetail.asp?STOCK_ID=' + event.message.text),
+                            label=event.message.text+'\n'+findName_Industry('http://goodinfo.tw/stockinfo/StockDetail.asp?STOCK_ID=' + event.message.text),
                             uri='http://goodinfo.tw/stockinfo/StockDetail.asp?STOCK_ID=' + event.message.text
                         )
                     ]
