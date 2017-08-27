@@ -165,7 +165,7 @@ def handle_text_message(event):
                     text='Please click following link',
                     actions=[            
                         URITemplateAction(
-                            label=event.message.text+'  '+findName_Industry('http://goodinfo.tw/stockinfo/StockDetail.asp?STOCK_ID=' + event.message.text),
+                            label=event.message.text+'  '+findName_Industry('http://goodinfo.tw/stockinfo/StockDetail.asp?STOCK_ID=' + event.message.text)[0]+' '+findName_Industry('http://goodinfo.tw/stockinfo/StockDetail.asp?STOCK_ID=' + event.message.text)[1],
                             uri='http://goodinfo.tw/stockinfo/StockDetail.asp?STOCK_ID=' + event.message.text
                         )
                     ]
