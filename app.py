@@ -127,18 +127,20 @@ def findStock():
     return sorted(list(map(lambda x: name_value[x], output)), key=lambda x: float(x[2]))
 
 def find_Industry(url):
-    print('IN industry')
+    
     header = {    
         'User-Agent':'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36'
     }    
     response = requests.get(url,headers=header)
-    print('response '+str(response))
     html = response.content.decode('utf-8')
 
     page = etree.HTML(html)
     
-    industry = page.xpath("//table[@class='solid_1_padding_3_2_tbl']//td[2]//text()")[4]
-    print(industry)
+    try:
+        industry = page.xpath("//table[@class='solid_1_padding_3_2_tbl']//td[2]//text()")[4]
+    except Exception as e:
+        industry = 'NULL'
+    
         
     return industry
 
