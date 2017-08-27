@@ -120,14 +120,14 @@ def findStock():
         print(index)
         industry = find_Industry('http://goodinfo.tw/stockinfo/StockDetail.asp?STOCK_ID='+index)
         #name_value[index].extend(industry)
-        print(industry)
+        #print(industry)
 
     #page.xpath("//table[@class='solid_1_padding_3_2_tbl']//td[2]//text()")[4]
     
     return sorted(list(map(lambda x: name_value[x], output)), key=lambda x: float(x[2]))
 
 def find_Industry(url):
-
+    print('IN industry')
     header = {    
         'User-Agent':'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36'
     }    
@@ -137,6 +137,7 @@ def find_Industry(url):
     page = etree.HTML(html)
     
     industry = page.xpath("//table[@class='solid_1_padding_3_2_tbl']//td[2]//text()")[4]
+    print(industry)
         
     return industry
 
