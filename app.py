@@ -133,7 +133,7 @@ def findName_Industry(url):
     name = temp[0]
     industry = temp[4] 
         
-    return name,industry  
+    return name 
 
 
 @handler.add(MessageEvent)
