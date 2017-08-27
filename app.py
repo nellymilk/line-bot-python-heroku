@@ -119,8 +119,9 @@ def findStock():
     for index in output:
         # print(index)
         industry = find_Industry('http://goodinfo.tw/stockinfo/StockDetail.asp?STOCK_ID='+index)
-        name_value[index].extend(industry)
-        #print(industry)
+        print(industry)
+        name_value[index].append(industry)
+        
 
     #page.xpath("//table[@class='solid_1_padding_3_2_tbl']//td[2]//text()")[4]
     print(list(map(lambda x: name_value[x], output)))
@@ -142,7 +143,7 @@ def find_Industry(url):
     except Exception as e:
         industry = 'NULL'
     
-       
+     
     return industry
 
 def find_Name(url):
