@@ -128,10 +128,9 @@ def findName_Industry(url):
     page = etree.HTML(html)
     # temp = []
     # name_value = {}
+    name = page.xpath("//table[@class='std_tbl']//td//text()")[0]
+    industry = page.xpath("//table[@class='solid_1_padding_3_2_tbl']//td[2]//text()")[4]
     
-    temp = page.xpath("//table[@class='solid_1_padding_3_2_tbl']//td[2]//text()")
-    name = temp[0]
-    industry = temp[4] 
         
     return [name,industry] 
 
@@ -165,7 +164,7 @@ def handle_text_message(event):
                     text='Please click following link',
                     actions=[            
                         URITemplateAction(
-                            label=event.message.text+'  '+findName_Industry('http://goodinfo.tw/stockinfo/StockDetail.asp?STOCK_ID=' + event.message.text)[1],
+                            label=findName_Industry('http://goodinfo.tw/stockinfo/StockDetail.asp?STOCK_ID=' + event.message.text)[0]+'  '+findName_Industry('http://goodinfo.tw/stockinfo/StockDetail.asp?STOCK_ID=' + event.message.text)[1],
                             uri='http://goodinfo.tw/stockinfo/StockDetail.asp?STOCK_ID=' + event.message.text
                         )
                     ]
