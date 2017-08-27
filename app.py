@@ -128,7 +128,7 @@ def findName_Industry(url):
     page = etree.HTML(html)
     # temp = []
     # name_value = {}
-    name = page.xpath("//table[@class='std_tbl']//td//text()")[0]
+    name = page.xpath("//table[@class='std_tbl']//td//a//text()")[0]
     industry = page.xpath("//table[@class='solid_1_padding_3_2_tbl']//td[2]//text()")[4]
     print(name+industry)
         
