@@ -117,6 +117,25 @@ def findStock():
     
     return sorted(list(map(lambda x: name_value[x], output)), key=lambda x: float(x[2]))
 
+def findName_Industry(url):
+
+    header = {    
+        'User-Agent':'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36'
+    }    
+    response = requests.get(url,headers=header)
+    html = response.content.decode('utf-8')
+
+    page = etree.HTML(html)
+    # temp = []
+    # name_value = {}
+    
+    temp = page.xpath("//table[@class='solid_1_padding_3_2_tbl']//td[2]//text()")
+    name = temp[0]
+    industry = temp[4] 
+        
+    return name,industry  
+
+
 @handler.add(MessageEvent)
 def handle_text_message(event):    
 
@@ -138,6 +157,7 @@ def handle_text_message(event):
             )
         else:    
             buttons_template_message = TemplateSendMessage(
+                name, industry = findName_Industry('http://goodinfo.tw/stockinfo/StockDetail.asp?STOCK_ID=' + event.message.text)
                 alt_text='Buttons template',
                 template=ButtonsTemplate(
                     thumbnail_image_url='https://raw.githubusercontent.com/nellymilk/line-bot-python-heroku/master/images/stock.jpg',
@@ -145,7 +165,7 @@ def handle_text_message(event):
                     text='Please click following link',
                     actions=[            
                         URITemplateAction(
-                            label=event.message.text,
+                            label=event.message.text+' '+name+' '+industry,
                             uri='http://goodinfo.tw/stockinfo/StockDetail.asp?STOCK_ID=' + event.message.text
                         )
                     ]
