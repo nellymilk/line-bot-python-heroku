@@ -114,15 +114,18 @@ def findStock():
     print('crawler successfully!')    
 
     output = list(filter(lambda x: len(x)<=4, list(result))) 
-    print(output)
-    print('\n')
-    print(name_value)
+    # print(output)
+    # print('\n')
+    # print(name_value)
     #sorted(list(map(lambda x: name_value[x], output)), key=lambda x: float(x[2]))
 
+    for index in output:
+
+    #page.xpath("//table[@class='solid_1_padding_3_2_tbl']//td[2]//text()")[4]
     
     return sorted(list(map(lambda x: name_value[x], output)), key=lambda x: float(x[2]))
 
-def findName_Industry(url):
+def find_Industry(url):
 
     header = {    
         'User-Agent':'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36'
@@ -131,13 +134,23 @@ def findName_Industry(url):
     html = response.content.decode('utf-8')
 
     page = etree.HTML(html)
-    # temp = []
-    # name_value = {}
-    name = page.xpath("//table[@class='std_tbl']//td//a//text()")[0]
+    
     industry = page.xpath("//table[@class='solid_1_padding_3_2_tbl']//td[2]//text()")[4]
-    print(name+industry)
         
-    return [name,industry] 
+    return industry
+
+def find_Name(url):
+
+    header = {    
+        'User-Agent':'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36'
+    }    
+    response = requests.get(url,headers=header)
+    html = response.content.decode('utf-8')
+
+    page = etree.HTML(html)
+    name = page.xpath("//table[@class='std_tbl']//td//a//text()")[0]
+    
+    return name
 
 
 @handler.add(MessageEvent)
@@ -169,7 +182,7 @@ def handle_text_message(event):
                     text='Please click following link',
                     actions=[            
                         URITemplateAction(
-                            label=findName_Industry('http://goodinfo.tw/stockinfo/StockDetail.asp?STOCK_ID=' + event.message.text)[0]+'  '+findName_Industry('http://goodinfo.tw/stockinfo/StockDetail.asp?STOCK_ID=' + event.message.text)[1],
+                            label=find_Name('http://goodinfo.tw/stockinfo/StockDetail.asp?STOCK_ID=' + event.message.text)+'  '+find_Industry('http://goodinfo.tw/stockinfo/StockDetail.asp?STOCK_ID=' + event.message.text),
                             uri='http://goodinfo.tw/stockinfo/StockDetail.asp?STOCK_ID=' + event.message.text
                         )
                     ]
