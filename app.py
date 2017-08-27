@@ -123,7 +123,7 @@ def findStock():
         #print(industry)
 
     #page.xpath("//table[@class='solid_1_padding_3_2_tbl']//td[2]//text()")[4]
-    print list(map(lambda x: name_value[x], output))
+    print(list(map(lambda x: name_value[x], output)))
     return sorted(list(map(lambda x: name_value[x], output)), key=lambda x: float(x[2]))
 
 def find_Industry(url):
