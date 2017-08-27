@@ -141,7 +141,8 @@ def find_Industry(url):
     except Exception as e:
         industry = 'NULL'
     
-        
+    if industry[:-1] != '業':
+        industry = 'NULL'    
     return industry
 
 def find_Name(url):
