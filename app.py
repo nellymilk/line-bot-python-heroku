@@ -155,7 +155,7 @@ def find_Name(url):
     html = response.content.decode('utf-8')
 
     page = etree.HTML(html)
-    name = page.xpath("//table[@class='std_tbl']//td//a//text()")[0]
+    name = page.xpath("//table[@class='std_tbl']//td[@class='head_td']//a[@class='link_blue']//text()")[0]
     
     return name
 
