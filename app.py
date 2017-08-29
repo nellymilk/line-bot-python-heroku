@@ -119,10 +119,12 @@ def findStock():
     for index in output:
         # print(index)
         while True:
+            time.sleep(1)
             industry = find_Industry('http://goodinfo.tw/stockinfo/StockDetail.asp?STOCK_ID='+index)
             if industry != 'NULL':
                 print(industry)
                 name_value[index].append(industry)
+
                 break                
     
     #print(list(map(lambda x: name_value[x], output)))
