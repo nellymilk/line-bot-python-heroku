@@ -118,11 +118,12 @@ def findStock():
 
     for index in output:
         # print(index)
-        industry = find_Industry('http://goodinfo.tw/stockinfo/StockDetail.asp?STOCK_ID='+index)
-        print(industry)
-        name_value[index].append(industry)
-        
-
+        while True:
+            industry = find_Industry('http://goodinfo.tw/stockinfo/StockDetail.asp?STOCK_ID='+index)
+            if industry != 'NULL':
+                print(industry)
+                name_value[index].append(industry)
+                break                
     
     #print(list(map(lambda x: name_value[x], output)))
     return sorted(list(map(lambda x: name_value[x], output)), key=lambda x: float(x[2]))
