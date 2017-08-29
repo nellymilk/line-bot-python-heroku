@@ -129,8 +129,9 @@ def findStock():
 
                 break                
     
-    #print(list(map(lambda x: name_value[x], output)))
-    return sorted(list(map(lambda x: name_value[x], output)), key=lambda x: float(x[2]))
+    print(list(map(lambda x: name_value[x], output)))
+    #return sorted(list(map(lambda x: name_value[x], output)), key=lambda x: float(x[2]))
+    return '123'
 
 def find_Industry(url):
     
