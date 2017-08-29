@@ -122,12 +122,15 @@ def findStock():
         # print(index)
         while True:
             time.sleep(1)
-            industry = find_Industry('http://goodinfo.tw/stockinfo/StockDetail.asp?STOCK_ID='+index)
-            if industry != 'NULL':
-                print(industry)
-                name_value[index].append(industry)
-
-                break                
+            try:
+                industry = find_Industry('http://goodinfo.tw/stockinfo/StockDetail.asp?STOCK_ID='+index)
+                if industry != 'NULL':
+                    print(industry)
+                    name_value[index].append(industry)
+                    break 
+            except Exception as e:
+                break
+                           
     
     print(list(map(lambda x: name_value[x], output)))
     #return sorted(list(map(lambda x: name_value[x], output)), key=lambda x: float(x[2]))
