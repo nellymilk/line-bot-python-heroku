@@ -116,11 +116,11 @@ def findStock():
     output = list(filter(lambda x: len(x)<=4, list(result))) 
    
 
-    # for index in output:
-    #     # print(index)
-    #     industry = find_Industry('http://goodinfo.tw/stockinfo/StockDetail.asp?STOCK_ID='+index)
-    #     print(industry)
-    #     name_value[index].append(industry)
+    for index in output:
+        # print(index)
+        industry = find_Industry('http://goodinfo.tw/stockinfo/StockDetail.asp?STOCK_ID='+index)
+        print(industry)
+        name_value[index].append(industry)
         
 
     
