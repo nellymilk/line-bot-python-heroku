@@ -118,23 +118,23 @@ def findStock():
     output = list(filter(lambda x: len(x)<=4, list(result))) 
    
 
-    for index in output:
-        # print(index)
-        while True:
-            time.sleep(1)
-            try:
-                industry = find_Industry('http://goodinfo.tw/stockinfo/StockDetail.asp?STOCK_ID='+index)
-                if industry != 'NULL':
-                    print(industry)
-                    name_value[index].append(industry)
-                    break 
-            except Exception as e:
-                break
+    # for index in output:
+    #     # print(index)
+    #     while True:
+    #         time.sleep(1)
+    #         try:
+    #             industry = find_Industry('http://goodinfo.tw/stockinfo/StockDetail.asp?STOCK_ID='+index)
+    #             if industry != 'NULL':
+    #                 print(industry)
+    #                 name_value[index].append(industry)
+    #                 break 
+    #         except Exception as e:
+    #             break
                            
     
-    print(list(map(lambda x: name_value[x], output)))
-    #return sorted(list(map(lambda x: name_value[x], output)), key=lambda x: float(x[2]))
-    return '123'
+    #print(list(map(lambda x: name_value[x], output)))
+    return sorted(list(map(lambda x: name_value[x], output)), key=lambda x: float(x[2]))
+    #return '123'
 
 def find_Industry(url):
     
