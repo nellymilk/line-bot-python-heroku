@@ -184,8 +184,9 @@ def handle_text_message(event):
         if event.message.text == 'help':
             
             result = findStock()
+            print(result)
             
-            if len(result) > 50:                
+            if len(result) > 40:                
                 temp = result[:40]
             else:
                 temp = result
