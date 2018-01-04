@@ -183,7 +183,7 @@ def handle_text_message(event):
 
         if event.message.text == 'help':
             result = findStock()
-            print(len(result))
+            print(result)
 
             line_bot_api.reply_message(
                 event.reply_token,TextSendMessage(text=str(result[:30]))
