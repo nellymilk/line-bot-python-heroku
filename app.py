@@ -182,18 +182,27 @@ def handle_text_message(event):
         # text = event.message.text + time + '\n ID: ' + event.source.user_id #message from user
 
         if event.message.text == 'help':
+            
             result = findStock()
             
             if len(result) > 50:                
-                temp = result[:60]
-                temp1 = result[50:]
-
-            print(temp1)
+                temp = result[:50]
+            else
+                temp = result
 
             line_bot_api.reply_message(
-                event.reply_token,TextSendMessage(text=str(len(result))+str(temp))
+                event.reply_token,TextSendMessage(text=str(len(result))+' items '+str(temp))
             )
-                        
+        
+        elif event.message.text == 'help2':
+            
+            result = findStock()
+            temp = result[50:]
+
+            line_bot_api.reply_message(
+                event.reply_token,TextSendMessage(text=str(temp))
+            )
+
         else:    
             buttons_template_message = TemplateSendMessage(
                # name, industry = findName_Industry('http://goodinfo.tw/stockinfo/StockDetail.asp?STOCK_ID=' + event.message.text),
