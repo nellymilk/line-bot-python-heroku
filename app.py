@@ -189,7 +189,9 @@ def handle_text_message(event):
                 temp1 = result[50:]
 
             line_bot_api.reply_message(
-                event.reply_token,TextSendMessage(text=str(temp))
+                event.reply_token,TextSendMessage(text=str(temp))                
+            )
+            line_bot_api.reply_message(
                 event.reply_token,TextSendMessage(text=str(temp1))
             )
             
