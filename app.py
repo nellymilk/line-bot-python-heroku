@@ -185,13 +185,13 @@ def handle_text_message(event):
             result = findStock()
             
             if len(result) > 50:                
-                temp = result[:50]
+                temp = result[:60]
                 temp1 = result[50:]
 
             print(temp1)
 
             line_bot_api.reply_message(
-                event.reply_token,TextSendMessage(text=str(temp)+str(temp1))
+                event.reply_token,TextSendMessage(text=str(temp))
             )
                         
         else:    
