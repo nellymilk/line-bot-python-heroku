@@ -187,7 +187,7 @@ def handle_text_message(event):
             
             if len(result) > 50:                
                 temp = result[:50]
-            else
+            else:
                 temp = result
 
             line_bot_api.reply_message(
