@@ -192,7 +192,7 @@ def handle_text_message(event):
                 temp = result
 
             line_bot_api.reply_message(
-                event.reply_token,TextSendMessage(text=str(len(result))+' items '+str(temp))
+                event.reply_token,TextSendMessage(text=str(len(result))+str(temp))
             )
         
         elif event.message.text == 'help2':
