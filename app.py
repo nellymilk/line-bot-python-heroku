@@ -186,7 +186,7 @@ def handle_text_message(event):
             print(result)
 
             line_bot_api.reply_message(
-                event.reply_token,TextSendMessage(text=str(result[:30]))
+                event.reply_token,TextSendMessage(text=str(12345))
             )
         else:    
             buttons_template_message = TemplateSendMessage(
