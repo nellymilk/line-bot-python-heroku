@@ -186,7 +186,7 @@ def handle_text_message(event):
             result = findStock()
             
             if len(result) > 50:                
-                temp = result[:50]
+                temp = result[:40]
             else:
                 temp = result
 
@@ -197,7 +197,7 @@ def handle_text_message(event):
         elif event.message.text == 'help2':
             
             result = findStock()
-            temp = result[50:]
+            temp = result[40:]
 
             line_bot_api.reply_message(
                 event.reply_token,TextSendMessage(text=str(temp))
