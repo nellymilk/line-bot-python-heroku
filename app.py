@@ -184,9 +184,9 @@ def handle_text_message(event):
         if event.message.text == 'help':
             result = findStock()
             print(result)
-
+            temp = result[:20]
             line_bot_api.reply_message(
-                event.reply_token,TextSendMessage(text=str(12345))
+                event.reply_token,TextSendMessage(text=str(temp))
             )
         else:    
             buttons_template_message = TemplateSendMessage(
