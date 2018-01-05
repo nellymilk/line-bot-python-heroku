@@ -188,6 +188,7 @@ def handle_text_message(event):
             
             if len(result) > 40:                
                 temp = result[:40]
+                print('enter')
             else:
                 temp = result
 
