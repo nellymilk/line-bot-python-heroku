@@ -168,6 +168,15 @@ def find_Name(url):
     
     return name
 
+def return_shortStock(result):
+
+    if len(result) < 40:
+        temp = result
+    else:
+        temp = result[:40]    
+
+    return temp
+
 
 @handler.add(MessageEvent)
 def handle_text_message(event):    
@@ -186,10 +195,7 @@ def handle_text_message(event):
             result = findStock()
             print(result)
             
-            # if len(result) < 40: 
-            #     temp = result
-            # else:
-            temp = result[:40]        
+            temp = return_shortStock(result)       
 
             line_bot_api.reply_message(
                 event.reply_token,TextSendMessage(text=str(len(result))+str(temp))
