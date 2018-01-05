@@ -189,8 +189,7 @@ def handle_text_message(event):
             if len(result) > 40:                
                 temp = result[:40]
                 print('enter')
-            else:
-                temp = result
+            
 
             line_bot_api.reply_message(
                 event.reply_token,TextSendMessage(text=str(len(result))+str(temp))
