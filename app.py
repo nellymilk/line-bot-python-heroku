@@ -170,10 +170,10 @@ def find_Name(url):
 
 def return_shortStock(result):
 
-    if len(result) < 40:
+    if len(result) < 30:
         temp = result
     else:
-        temp = result[:40]    
+        temp = result[:30]    
 
     return temp
 
@@ -193,7 +193,7 @@ def handle_text_message(event):
         if event.message.text == 'help':
             
             result = findStock()
-            print(result)
+            print(str(len(result))+str(result))
             
             temp = return_shortStock(result)       
 
