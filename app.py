@@ -193,7 +193,7 @@ def handle_text_message(event):
         if event.message.text == 'help':
             
             result = findStock()
-            #print(str(len(result))+str(result))
+            print(str(len(result))+str(result))
             
             temp = return_shortStock(result)   
             #print(temp)    
