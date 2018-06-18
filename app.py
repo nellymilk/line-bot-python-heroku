@@ -223,21 +223,25 @@ def handle_text_message(event):
                         URITemplateAction(
                             label=find_Name('http://goodinfo.tw/stockinfo/StockDetail.asp?STOCK_ID=' + event.message.text)+'  '+find_Industry('http://goodinfo.tw/stockinfo/StockDetail.asp?STOCK_ID=' + event.message.text),
                             uri='http://goodinfo.tw/stockinfo/StockDetail.asp?STOCK_ID=' + event.message.text
+                        ),
+                        URITemplateAction(
+                            label='KD & MACD',
+                            uri='https://stock.wearn.com/finance_chart.asp?stockid=' + event.message.text + '&timekind=0&timeblock=90&sma1=&sma2=&sma3=&volume=0&indicator1=SStoch&indicator2=MACD&indicator3=Vol'
                         )
                     ]
                 )
             )
 
-            message = {
-            
-                "type": "image",
-                "originalContentUrl": 'https://stock.wearn.com/finance_chart.asp?stockid=' + event.message.text + '&timekind=0&timeblock=90&sma1=&sma2=&sma3=&volume=0&indicator1=SStoch&indicator2=MACD&indicator3=Vol',
-                "previewImageUrl": 'https://stock.wearn.com/finance_chart.asp?stockid=' + event.message.text + '&timekind=0&timeblock=90&sma1=&sma2=&sma3=&volume=0&indicator1=SStoch&indicator2=MACD&indicator3=Vol'
-            }
+            # message = {
 
-            line_bot_api.reply_message(
-                event.reply_token, message
-            )
+            #     "type": "image",
+            #     "originalContentUrl": 'https://stock.wearn.com/finance_chart.asp?stockid=' + event.message.text + '&timekind=0&timeblock=90&sma1=&sma2=&sma3=&volume=0&indicator1=SStoch&indicator2=MACD&indicator3=Vol',
+            #     "previewImageUrl": 'https://stock.wearn.com/finance_chart.asp?stockid=' + event.message.text + '&timekind=0&timeblock=90&sma1=&sma2=&sma3=&volume=0&indicator1=SStoch&indicator2=MACD&indicator3=Vol'
+            # }
+
+            # line_bot_api.reply_message(
+            #     event.reply_token, message
+            # )
 
             line_bot_api.reply_message(
                 event.reply_token,buttons_template_message
